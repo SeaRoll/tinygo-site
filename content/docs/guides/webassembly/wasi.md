@@ -16,7 +16,8 @@ Here is a small TinyGo program for use within a WASI host application:
 ```go
 package main
 
-//go:wasmimport yourmodulename add
+//go:wasm-module yourmodulename
+//export add
 func add(x, y uint32) uint32 {
 	return x + y
 }
@@ -28,5 +29,5 @@ func main() {}
 To compile the above TinyGo program for use on any WASI runtime:
 
 ```shell
-GOOS=wasip1 GOARCH=wasm tinygo build -o main.wasm main.go
+tinygo build -o main.wasm -target=wasip1 main.go
 ```
